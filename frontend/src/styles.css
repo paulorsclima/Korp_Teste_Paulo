@@ -1,0 +1,29 @@
+/* Global styles */
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.mat-mdc-form-field {
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.container {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+}
+
+mat-card {
+  margin-bottom: 16px;
+}
