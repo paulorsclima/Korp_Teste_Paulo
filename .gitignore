@@ -53,3 +53,10 @@ coverage/
 *.nupkg
 *.snupkg
 packages/
+
+# Segredos locais e connection strings
+backend/StockService/appsettings.Development.json
+backend/InvoicingService/appsettings.Development.json
+
+# Angular cache
+frontend/.angular/
