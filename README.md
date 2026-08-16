@@ -1,154 +1,295 @@
 # Sistema de Emisssão de Notas Fiscais - Korp
 
-## Visão Geral
-Sistema de emissão de notas fiscais desenvolvido com arquitetura de microsserviços utilizando Angular no frontend e C# (.NET 8) no backend.
-
 [![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com)
 [![Angular](https://img.shields.io/badge/Angular-17-DD0031?logo=angular)](https://angular.io)
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-Azure-CC2927?logo=microsoft-sql-server)](https://azure.microsoft.com)
 
-## 🏗️ Arquitetura
+Sistema de Emissão de Notas Fiscais — Korp
+Sistema de emissão de notas fiscais desenvolvido para processo seletivo da Korp, utilizando Angular no frontend e .NET 8 no backend, organizado em dois microsserviços.
 
-### Microsservi\u00e7os
-- **Serviço de Estoque** (porta 5001): Controle de produtos e saldos
-- **Serviço de Faturamento** (porta 5002): Gest\u00e3o de notas fiscais
+Visão geral
+A aplicação é composta por:
 
-### Frontend
-- **Angular 17+** com Angular Material
+StockService: responsável pelo cadastro e consulta de produtos e saldos de estoque.
 
-### Banco de Dados
-- **SQL Server** (Azure)
+InvoicingService: responsável pelo cadastro, consulta e gerenciamento de notas fiscais e seus itens.
 
-## ✨ Funcionalidades
+Frontend Angular: interface para interação com produtos e notas fiscais.
 
-### Cadastro de Produtos
-- Código
-- Descrição (nome do produto)
-- Saldo (quantidade disponivel em estoque)
+SQL Server: banco de dados utilizado pelos serviços, hospedado no Azure ou executado localmente.
 
-### Cadastro de Notas Fiscais
-- Numeração sequencial automatica
-- Status: Aberta ou Fechada
-- Inclusão de multiplos produtos com respectivas quantidades
+Arquitetura
+text
+Frontend Angular
+      │
+      ├── StockService — http://localhost:5001
+      │       └── Produtos e estoque
+      │
+      └── InvoicingService — http://localhost:5002
+              └── Notas fiscais e itens
 
-### Impressão de Notas Fiscais
-- Botão de impressão visual e intuitivo
-- Indicador de processamento
-- Atualização de status para Fechada após impressão
-- Atualização automatica do saldo dos produtos
+SQL Server / Azure SQL
+Microsserviços
+Serviço	Porta	Responsabilidade
+StockService	5001	Cadastro e consulta de produtos e estoque
+InvoicingService	5002	Cadastro e consulta de notas fiscais e itens
+Frontend
+Angular 17+
 
-## 🛠️ Requisitos Técnicos
+Angular Material
 
-### Backend
-- .NET 8
-- Entity Framework Core
-- SQL Server
-- Polly (para tratamento de falhas e retry)
+RxJS
 
-### Frontend
-- Angular 17+
-- Angular Material
-- RxJS
+HttpClient
 
-## 🚀 Como Executar
+Banco de dados
+SQL Server / Azure SQL
 
-### Pre-requisitos
-- .NET 8 SDK
-- Node.js 18+
-- SQL Server (Azure ou local)
+Entity Framework Core
 
-### Configuração do Banco de Dados
+Migrations para criação e atualização da estrutura do banco
 
-1. Crie um banco de dados no Azure SQL chamado `KorpTeste`
-2. Atualize as connection strings nos arquivos:
-   - `backend/StockService/appsettings.json`
-   - `backend/InvoicingService/appsettings.json`
+Funcionalidades
+Produtos
+Cadastro de produtos.
 
-```json
-"ConnectionStrings": {
-  "DefaultConnection": "Server=tcp:SEU_SERVIDOR.database.windows.net,1433;Database=KorpTeste;User ID=SEU_USUARIO@SEU_SERVIDOR;Password=SUA_SENHA;Encrypt=True;TrustServerCertificate=False;"
+Código do produto.
+
+Descrição ou nome.
+
+Saldo disponível em estoque.
+
+Listagem e consulta de produtos.
+
+Validação de código duplicado no cadastro.
+
+Notas fiscais
+Criação de notas fiscais.
+
+Numeração gerada pelo sistema.
+
+Status da nota.
+
+Inclusão de múltiplos produtos.
+
+Definição da quantidade de cada item.
+
+Consulta de notas e respectivos itens.
+
+Comunicação com o serviço de estoque durante o processo de faturamento.
+
+APIs
+As APIs podem ser testadas pelo Swagger:
+
+Swagger — StockService
+
+Swagger — InvoicingService
+
+Os endpoints disponíveis dependem da implementação atual de cada serviço. As operações de consulta e criação devem ser testadas pelo Swagger antes da apresentação.
+
+Requisitos
+.NET 8 SDK.
+
+Node.js 18 ou superior.
+
+npm.
+
+SQL Server local ou Azure SQL.
+
+Acesso ao banco configurado para a máquina que executará os serviços.
+
+Configuração do banco de dados
+Crie ou utilize um banco SQL Server, por exemplo, KorpTeste, e configure a connection string nos arquivos:
+
+text
+backend/StockService/appsettings.json
+backend/InvoicingService/appsettings.json
+Exemplo de configuração:
+
+json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=tcp:SEU_SERVIDOR.database.windows.net,1433;Database=KorpTeste;User ID=SEU_USUARIO;Password=SUA_SENHA;Encrypt=True;TrustServerCertificate=False;"
+  }
 }
-```
+Não versionar senhas, tokens ou connection strings reais no repositório. Utilize variáveis de ambiente ou configuração local para informações sensíveis.
 
-### Backend
+Como executar
+StockService
+Abra um terminal:
 
-```bash
-# Serviço de Estoque
-cd backend/StockService
-dotnet restore
+powershell
+cd "C:\Projetos\Korp_Teste_Paulo\backend\StockService"
+dotnet build
 dotnet ef database update
 dotnet run --urls="http://localhost:5001"
+Swagger:
 
-# Serviço de Faturamento (outro terminal)
-cd backend/InvoicingService
-dotnet restore
+text
+http://localhost:5001/swagger/index.html
+InvoicingService
+Abra outro terminal:
+
+powershell
+cd "C:\Projetos\Korp_Teste_Paulo\backend\InvoicingService"
+dotnet build
 dotnet ef database update
 dotnet run --urls="http://localhost:5002"
-```
+Swagger:
 
-### Frontend
+text
+http://localhost:5002/swagger/index.html
+O InvoicingService deve ser executado com o StockService disponível na porta 5001, pois os serviços se comunicam durante o fluxo de faturamento.
 
-```bash
-cd frontend
+Frontend
+Abra um terceiro terminal:
+
+powershell
+cd "C:\Projetos\Korp_Teste_Paulo\frontend"
 npm install
-ng serve
-```
+npx ng serve
+Acesse:
 
-Acesse: http://localhost:4200
+text
+http://localhost:4200
+No uso diário, quando as dependências já estiverem instaladas, normalmente basta executar:
 
-## 📦 Tratamento de Falhas
+powershell
+npx ng serve
+Ordem recomendada para os testes
+Iniciar o StockService na porta 5001.
 
-O sistema implementa tratamento de falhas utilizando **Polly** para retry e circuit breaker nos microsserviços:
+Iniciar o InvoicingService na porta 5002.
 
-```csharp
+Iniciar o frontend Angular.
+
+Cadastrar ou consultar um produto.
+
+Criar uma nota fiscal.
+
+Adicionar um ou mais produtos à nota.
+
+Consultar a nota e confirmar seus itens e status.
+
+Testar o fluxo de fechamento ou impressão somente se estiver disponível na versão atual.
+
+Tratamento de falhas
+As chamadas entre os serviços podem utilizar Polly para tratar erros temporários de comunicação e realizar novas tentativas.
+
+Exemplo de política de retry:
+
+csharp
 static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 {
     return HttpPolicyExtensions
         .HandleTransientHttpError()
-        .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+        .WaitAndRetryAsync(
+            3,
+            retryAttempt => TimeSpan.FromSeconds(
+                Math.Pow(2, retryAttempt)));
 }
-```
+Essa política representa novas tentativas para falhas transitórias. O uso de circuit breaker só deve ser declarado caso exista uma configuração específica dessa política no código.
 
-## 📝 Detalhamento Tecnico
+Detalhes técnicos
+Backend
+.NET 8.
 
-### Ciclos de Vida do Angular
-- **OnInit**: Utilizado em `ProductListComponent` e `InvoiceListComponent` para carregar dados ao inicializar
+C#.
 
-### RxJS
-- Observables do `HttpClient` para chamadas HTTP
-- Subscriptions com tratamento de erro
+Entity Framework Core.
 
-### Bibliotecas
+SQL Server / Azure SQL.
 
-#### Frontend
-- **@angular/material**: Componentes visuais (toolbar, cards, tables, forms, buttons, dialogs, snackbars, icons)
-- **@angular/cdk**: Infraestrutura de componentes
-- **rxjs**: Programa\u00e7\u00e3o reativa
+LINQ.
 
-#### Backend
-- **Entity Framework Core**: ORM para acesso ao banco de dados
-- **Polly**: Tratamento de falhas e resilience
-- **Swashbuckle**: Swagger/OpenAPI
+Swagger/OpenAPI com Swashbuckle.
 
-### Gerenciamento de Dependencias (C#)
-- **NuGet**: Package manager
-- **csproj**: Arquivo de projeto com dependencias
+NuGet para gerenciamento de pacotes.
 
-### LINQ
-Utilizado extensivamente para consultas:
-```csharp
-await db.Products.OrderBy(p => p.Description).ToListAsync()
-await db.Products.AnyAsync(p => p.Code == product.Code)
-await db.Invoices.Include(i => i.Items).FirstOrDefaultAsync(i => i.Id == id)
-```
+Arquivos .csproj para configuração dos projetos.
 
-## 👨‍💻 Autor
+Exemplos de consultas LINQ utilizadas no projeto:
 
-**Paulo Ricardo S C Lima**
-- GitHub: [@paulorsclima](https://github.com/paulorsclima)
-- LinkedIn: [linkedin.com/in/paulo-ricardo-cardoso-a134131a6](http://www.linkedin.com/in/paulo-ricardo-cardoso-a134131a6)
-- Email: paulo.rsclima@gmail.com
+csharp
+await db.Products
+    .OrderBy(p => p.Description)
+    .ToListAsync();
 
-## 📄 Licença
+await db.Products
+    .AnyAsync(p => p.Code == product.Code);
 
+await db.Invoices
+    .Include(i => i.Items)
+    .FirstOrDefaultAsync(i => i.Id == id);
+Frontend
+Angular 17+.
+
+Angular Material para os componentes visuais.
+
+RxJS para programação reativa.
+
+HttpClient para chamadas HTTP.
+
+Componentes de listagem e formulários.
+
+Tratamento de respostas e erros nas chamadas dos serviços.
+
+Uso do ciclo de vida OnInit para carregamento inicial dos dados.
+
+Estrutura do projeto
+text
+Korp_Teste_Paulo/
+├── backend/
+│   ├── StockService/
+│   │   ├── Data/
+│   │   ├── Migrations/
+│   │   ├── Models/
+│   │   ├── Program.cs
+│   │   ├── StockService.csproj
+│   │   └── appsettings.json
+│   │
+│   └── InvoicingService/
+│       ├── Data/
+│       ├── Migrations/
+│       ├── Models/
+│       ├── Program.cs
+│       ├── InvoicingService.csproj
+│       └── appsettings.json
+│
+└── frontend/
+    ├── src/
+    ├── angular.json
+    ├── package.json
+    └── tsconfig.json
+Limpeza de dados de teste
+Para excluir dados de teste, prefira utilizar endpoints de exclusão disponíveis no Swagger. Caso seja necessário realizar a limpeza diretamente no Azure SQL, confirme primeiro o banco e os registros e faça backup antes de executar comandos DELETE.
+
+Ao excluir dados relacionados, remova primeiro os itens da nota e depois a nota principal, respeitando as chaves estrangeiras.
+
+Não utilize DROP TABLE nem dotnet ef database drop para uma simples limpeza de registros.
+
+Validação da criação de uma nota
+Após criar uma nota pelo frontend ou Swagger:
+
+Verifique se a API retornou sucesso.
+
+Copie o ID retornado.
+
+Consulte a lista de notas.
+
+Consulte a nota pelo ID.
+
+Confirme os itens e o status retornados.
+
+Autor
+Paulo Ricardo S C Lima
+
+GitHub: @paulorsclima
+
+LinkedIn: Paulo Ricardo Cardoso
+
+E-mail: paulo.rsclima@gmail.com
+
+Licença
+Projeto desenvolvido para processo seletivo da Korp.
 Projeto desenvolvido para processo seletivo - Korp
