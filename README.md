@@ -1,7 +1,7 @@
-# Sistema de Emiss\u00e3o de Notas Fiscais - Korp
+# Sistema de Emisssão de Notas Fiscais - Korp
 
-## Vis\u00e3o Geral
-Sistema de emiss\u00e3o de notas fiscais desenvolvido com arquitetura de microsservi\u00e7os utilizando Angular no frontend e C# (.NET 8) no backend.
+## Visão Geral
+Sistema de emissão de notas fiscais desenvolvido com arquitetura de microsserviços utilizando Angular no frontend e C# (.NET 8) no backend.
 
 [![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com)
 [![Angular](https://img.shields.io/badge/Angular-17-DD0031?logo=angular)](https://angular.io)
@@ -10,8 +10,8 @@ Sistema de emiss\u00e3o de notas fiscais desenvolvido com arquitetura de micross
 ## 🏗️ Arquitetura
 
 ### Microsservi\u00e7os
-- **Servi\u00e7o de Estoque** (porta 5001): Controle de produtos e saldos
-- **Servi\u00e7o de Faturamento** (porta 5002): Gest\u00e3o de notas fiscais
+- **Serviço de Estoque** (porta 5001): Controle de produtos e saldos
+- **Serviço de Faturamento** (porta 5002): Gest\u00e3o de notas fiscais
 
 ### Frontend
 - **Angular 17+** com Angular Material
@@ -22,22 +22,22 @@ Sistema de emiss\u00e3o de notas fiscais desenvolvido com arquitetura de micross
 ## ✨ Funcionalidades
 
 ### Cadastro de Produtos
-- C\u00f3digo
-- Descri\u00e7\u00e3o (nome do produto)
-- Saldo (quantidade dispon\u00edvel em estoque)
+- Código
+- Descrição (nome do produto)
+- Saldo (quantidade disponivel em estoque)
 
 ### Cadastro de Notas Fiscais
-- Numera\u00e7\u00e3o sequencial autom\u00e1tica
+- Numeração sequencial automatica
 - Status: Aberta ou Fechada
-- Inclus\u00e3o de m\u00faltiplos produtos com respectivas quantidades
+- Inclusão de multiplos produtos com respectivas quantidades
 
-### Impress\u00e3o de Notas Fiscais
-- Bot\u00e3o de impress\u00e3o vis\u00edvel e intuitivo
+### Impressão de Notas Fiscais
+- Botão de impressão visual e intuitivo
 - Indicador de processamento
-- Atualiza\u00e7\u00e3o de status para Fechada ap\u00f3s impress\u00e3o
-- Atualiza\u00e7\u00e3o autom\u00e1tica do saldo dos produtos
+- Atualização de status para Fechada após impressão
+- Atualização automatica do saldo dos produtos
 
-## 🛠️ Requisitos T\u00e9cnicos
+## 🛠️ Requisitos Técnicos
 
 ### Backend
 - .NET 8
@@ -52,12 +52,12 @@ Sistema de emiss\u00e3o de notas fiscais desenvolvido com arquitetura de micross
 
 ## 🚀 Como Executar
 
-### Pr\u00e9-requisitos
+### Pre-requisitos
 - .NET 8 SDK
 - Node.js 18+
 - SQL Server (Azure ou local)
 
-### Configura\u00e7\u00e3o do Banco de Dados
+### Configuração do Banco de Dados
 
 1. Crie um banco de dados no Azure SQL chamado `KorpTeste`
 2. Atualize as connection strings nos arquivos:
@@ -73,13 +73,13 @@ Sistema de emiss\u00e3o de notas fiscais desenvolvido com arquitetura de micross
 ### Backend
 
 ```bash
-# Servi\u00e7o de Estoque
+# Serviço de Estoque
 cd backend/StockService
 dotnet restore
 dotnet ef database update
 dotnet run --urls="http://localhost:5001"
 
-# Servi\u00e7o de Faturamento (outro terminal)
+# Serviço de Faturamento (outro terminal)
 cd backend/InvoicingService
 dotnet restore
 dotnet ef database update
@@ -98,7 +98,7 @@ Acesse: http://localhost:4200
 
 ## 📦 Tratamento de Falhas
 
-O sistema implementa tratamento de falhas utilizando **Polly** para retry e circuit breaker nos microsservi\u00e7os:
+O sistema implementa tratamento de falhas utilizando **Polly** para retry e circuit breaker nos microsserviços:
 
 ```csharp
 static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
@@ -109,7 +109,7 @@ static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 }
 ```
 
-## 📝 Detalhamento T\u00e9cnico
+## 📝 Detalhamento Tecnico
 
 ### Ciclos de Vida do Angular
 - **OnInit**: Utilizado em `ProductListComponent` e `InvoiceListComponent` para carregar dados ao inicializar
@@ -130,9 +130,9 @@ static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 - **Polly**: Tratamento de falhas e resilience
 - **Swashbuckle**: Swagger/OpenAPI
 
-### Gerenciamento de Depend\u00eancias (C#)
+### Gerenciamento de Dependencias (C#)
 - **NuGet**: Package manager
-- **csproj**: Arquivo de projeto com depend\u00eancias
+- **csproj**: Arquivo de projeto com dependencias
 
 ### LINQ
 Utilizado extensivamente para consultas:
@@ -149,6 +149,6 @@ await db.Invoices.Include(i => i.Items).FirstOrDefaultAsync(i => i.Id == id)
 - LinkedIn: [linkedin.com/in/paulo-ricardo-cardoso-a134131a6](http://www.linkedin.com/in/paulo-ricardo-cardoso-a134131a6)
 - Email: paulo.rsclima@gmail.com
 
-## 📄 Licen\u00e7a
+## 📄 Licença
 
 Projeto desenvolvido para processo seletivo - Korp
