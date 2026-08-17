@@ -163,12 +163,15 @@ powershell
 cd "C:\Projetos\Korp_Teste_Paulo\frontend"
 npm install
 npx ng serve
+```
+
 Acesse:
 
 text
 http://localhost:4200
+
 No uso diário, quando as dependências já estiverem instaladas, normalmente basta executar:
-```
+
 powershell
 npx ng serve
 
