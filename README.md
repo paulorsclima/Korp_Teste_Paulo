@@ -21,6 +21,7 @@ SQL Server: banco de dados utilizado pelos serviços, hospedado no Azure ou exec
 Arquitetura
 text
 Frontend Angular
+      
       │
       ├── StockService — http://localhost:5001
       │       └── Produtos e estoque
