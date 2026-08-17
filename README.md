@@ -113,6 +113,7 @@ json
     "DefaultConnection": "Server=tcp:SEU_SERVIDOR.database.windows.net,1433;Database=KorpTeste;User ID=SEU_USUARIO;Password=SUA_SENHA;Encrypt=True;TrustServerCertificate=False;"
   }
 }
+
 Não versionar senhas, tokens ou connection strings reais no repositório. Utilize variáveis de ambiente ou configuração local para informações sensíveis.
 
 Como executar
