@@ -22,12 +22,27 @@ Arquitetura
 text
 Frontend Angular
       
-      │
-      ├── StockService — http://localhost:5001
-      │       └── Produtos e estoque
-      │
-      └── InvoicingService — http://localhost:5002
-              └── Notas fiscais e itens
+```
+┌─────────────────┐         ┌─────────────────┐
+│   Frontend      │         │   Frontend      │
+│   Angular 17    │         │   Angular 17    │
+└────────┬────────┘         └────────┬────────┘
+         │                          │
+         │ HTTP                     │ HTTP
+         │                          │
+┌────────▼────────┐         ┌───────▼────────┐
+│ Stock Service   │◄────────│ Invoicing      │
+│ Port: 5001      │         │ Service        │
+│                 │         │ Port: 5002     │
+└────────┬────────┘         └───────┬────────┘
+         │                          │
+         └──────────┬───────────────┘
+                    │
+           ┌────────▼────────┐
+           │  SQL Server     │
+           │  (Azure)        │
+           └─────────────────┘
+```
 
 SQL Server / Azure SQL
 
