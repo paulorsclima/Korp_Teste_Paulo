@@ -346,4 +346,3 @@ E-mail: paulo.rsclima@gmail.com
 
 Licença
 Projeto desenvolvido para processo seletivo da Korp.
-Projeto desenvolvido para processo seletivo - Korp
