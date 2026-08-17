@@ -106,18 +106,21 @@ text
 backend/StockService/appsettings.json
 backend/InvoicingService/appsettings.json
 Exemplo de configuração:
-
+```text
 json
 {
   "ConnectionStrings": {
     "DefaultConnection": "Server=tcp:SEU_SERVIDOR.database.windows.net,1433;Database=KorpTeste;User ID=SEU_USUARIO;Password=SUA_SENHA;Encrypt=True;TrustServerCertificate=False;"
   }
 }
+```
 
 Não versionar senhas, tokens ou connection strings reais no repositório. Utilize variáveis de ambiente ou configuração local para informações sensíveis.
 
 Como executar
 StockService
+
+```text
 Abra um terminal:
 
 powershell
@@ -125,11 +128,15 @@ cd "C:\Projetos\Korp_Teste_Paulo\backend\StockService"
 dotnet build
 dotnet ef database update
 dotnet run --urls="http://localhost:5001"
+```
+
 Swagger:
 
 text
 http://localhost:5001/swagger/index.html
 InvoicingService
+
+```text
 Abra outro terminal:
 
 powershell
@@ -137,12 +144,15 @@ cd "C:\Projetos\Korp_Teste_Paulo\backend\InvoicingService"
 dotnet build
 dotnet ef database update
 dotnet run --urls="http://localhost:5002"
+```
+
 Swagger:
 
 text
 http://localhost:5002/swagger/index.html
 O InvoicingService deve ser executado com o StockService disponível na porta 5001, pois os serviços se comunicam durante o fluxo de faturamento.
 
+```text
 Frontend
 Abra um terceiro terminal:
 
@@ -155,9 +165,10 @@ Acesse:
 text
 http://localhost:4200
 No uso diário, quando as dependências já estiverem instaladas, normalmente basta executar:
-
+```
 powershell
 npx ng serve
+
 Ordem recomendada para os testes
 Iniciar o StockService na porta 5001.
 
@@ -180,6 +191,7 @@ As chamadas entre os serviços podem utilizar Polly para tratar erros temporári
 
 Exemplo de política de retry:
 
+```text
 csharp
 static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 {
@@ -190,6 +202,8 @@ static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
             retryAttempt => TimeSpan.FromSeconds(
                 Math.Pow(2, retryAttempt)));
 }
+```
+
 Essa política representa novas tentativas para falhas transitórias. O uso de circuit breaker só deve ser declarado caso exista uma configuração específica dessa política no código.
 
 Detalhes técnicos
@@ -238,8 +252,9 @@ Tratamento de respostas e erros nas chamadas dos serviços.
 
 Uso do ciclo de vida OnInit para carregamento inicial dos dados.
 
-Estrutura do projeto
-text
+## Estrutura do projeto
+
+```text
 Korp_Teste_Paulo/
 ├── backend/
 │   ├── StockService/
@@ -263,6 +278,8 @@ Korp_Teste_Paulo/
     ├── angular.json
     ├── package.json
     └── tsconfig.json
+```
+    
 Limpeza de dados de teste
 Para excluir dados de teste, prefira utilizar endpoints de exclusão disponíveis no Swagger. Caso seja necessário realizar a limpeza diretamente no Azure SQL, confirme primeiro o banco e os registros e faça backup antes de executar comandos DELETE.
 
