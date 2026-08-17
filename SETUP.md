@@ -1,6 +1,6 @@
-# 🚀 Guia de Setup R\u00e1pido
+# 🚀 Guia de Setup Rápido
 
-## Pr\u00e9-requisitos
+## Pré-requisitos
 
 1. **.NET 8 SDK** - https://dotnet.microsoft.com/download
 2. **Node.js 18+** - https://nodejs.org
@@ -9,7 +9,7 @@
 
 ## Passo 1 - Configurar Banco de Dados
 
-### Op\u00e7\u00e3o A: Azure SQL (Recomendado)
+### Operação A: Azure SQL (Recomendado)
 
 1. Acesse https://portal.azure.com
 2. Crie um SQL Database chamado `KorpTeste`
@@ -19,9 +19,9 @@
    - Username: `seu-usuario`
    - Password: `sua-senha`
 
-### Op\u00e7\u00e3o B: SQL Server Local (Desenvolvimento)
+### Operação B: SQL Server Local (Desenvolvimento)
 
-J\u00e1 configurado para usar LocalDB. Pule para o Passo 2.
+Já configurado para usar LocalDB. Pule para o Passo 2.
 
 ## Passo 2 - Atualizar Connection Strings
 
@@ -86,27 +86,27 @@ Acesse: http://localhost:4200
    - Clique em "Nova Nota Fiscal"
    - Clique em "Imprimir" para fechar a nota
 
-3. **Verifica\u00e7\u00e3o:**
+3. **Verificação:**
    - Volte em "Produtos"
    - Verifique se o saldo foi atualizado
 
-## 🐛 Problemas Comuns
+## Problemas Comuns
 
 ### Erro: "The target framework 'net8.0' is not installed"
 - Instale .NET 8 SDK
 
 ### Erro: "npm ERR! code ENOENT"
-- Certifique-se de estar no diret\u00f3rio `frontend`
+- Certifique-se de estar no diretorio `frontend`
 - Execute `npm install`
 
 ### Erro: "Cannot connect to database"
 - Verifique a connection string
-- Confira se o SQL Server est\u00e1 acess\u00edvel
+- Confira se o SQL Server esta acessivel
 
 ### Erro: "Port 5001 already in use"
-- Outro processo est\u00e1 usando a porta
+- Outro processo esta usando a porta
 - Mude a porta em `Program.cs` ou feche o processo
 
-## 📞 Suporte
+## Suporte
 
-Em caso de d\u00favidas, consulte o README.md ou abra uma issue.
+Em caso de duvidas, consulte o README.md
