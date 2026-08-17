@@ -134,6 +134,8 @@ Swagger:
 
 text
 http://localhost:5001/swagger/index.html
+
+Como executar
 InvoicingService
 
 ```text
@@ -150,6 +152,7 @@ Swagger:
 
 text
 http://localhost:5002/swagger/index.html
+
 O InvoicingService deve ser executado com o StockService disponível na porta 5001, pois os serviços se comunicam durante o fluxo de faturamento.
 
 ```text
