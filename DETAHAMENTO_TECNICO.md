@@ -27,8 +27,11 @@
 ```
 
 Ciclos de vida do Angular utilizados
+
 OnInit
 Utilizado nos principais componentes para carregar os dados durante a inicialização:
+
+
 ```
 typescript
 export class ProductListComponent implements OnInit {
@@ -44,19 +47,26 @@ export class ProductListComponent implements OnInit {
   }
 }
 ```
+
+
 Por que utilizar OnInit?
 
 Garante que o componente esteja inicializado antes de realizar chamadas HTTP.
 
+
 Permite carregar os dados assim que o componente é renderizado.
+
 
 É o ciclo de vida adequado para a inicialização dos dados.
 
+
 Uso de RxJS
 Observables do HttpClient
+
+
 O Angular utiliza RxJS nativamente no HttpClient:
 
-typescript
+```typescript
 // Service
 getProducts(): Observable<Product[]> {
   return this.http.get<Product[]>(`${this.stockApiUrl}/products`);
@@ -67,8 +77,10 @@ this.apiService.getProducts().subscribe({
   next: (data) => this.products = data,
   error: (err) => this.handleError(err)
 });
+```
 
 Benefícios do RxJS
+
 Programação assíncrona: gerencia operações assíncronas de forma eficiente.
 
 Tratamento de erros: permite centralizar o tratamento no callback error.
@@ -76,6 +88,8 @@ Tratamento de erros: permite centralizar o tratamento no callback error.
 Cancelamento: possibilita cancelar subscriptions quando o componente é destruído.
 
 Operadores: permite utilizar operadores como map, filter e retry.
+
+
 ```
 Bibliotecas utilizadas
 Frontend
@@ -96,7 +110,7 @@ Gerenciamento de dependências
 C# (.NET)
 No .NET, o gerenciamento de dependências é feito por meio do NuGet.
 ```
-Arquivo .csproj:
+```Arquivo .csproj:
 
 xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -105,17 +119,24 @@ xml
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
   </ItemGroup>
 </Project>
+```
+
 Comandos:
 
 bash
+
 dotnet restore                 # Restaura os pacotes
+
 dotnet add package Polly       # Adiciona um pacote
+
 dotnet remove package Polly   # Remove um pacote
+
 Angular/TypeScript
+
 No frontend, o gerenciamento de dependências é feito por meio do npm.
 
-Arquivo package.json:
-```
+
+```Arquivo package.json:
 json
 {
   "dependencies": {
@@ -127,11 +148,17 @@ json
 Comandos:
 
 bash
+
 npm install                         # Instala as dependências
+
 npm install @angular/material       # Adiciona um pacote
+
 npm uninstall @angular/material     # Remove um pacote
+
 Tratamento de erros e exceções
+
 Backend — Try-Catch
+```
 csharp
 app.MapPost("/api/invoices/{id}/close", async (
     int id,
@@ -167,7 +194,9 @@ app.MapPost("/api/invoices/{id}/close", async (
             $"Failed to close invoice: {ex.Message}");
     }
 });
-Backend — Validações
+```
+
+```Backend — Validações
 csharp
 // Validação da existência do produto
 if (product is null)
@@ -186,7 +215,8 @@ if (await db.Products.AnyAsync(p => p.Code == product.Code))
 {
     return Results.BadRequest("Product code already exists");
 }
-Backend — Polly e resiliência
+```
+```Backend — Polly e resiliência
 csharp
 static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 {
@@ -197,6 +227,7 @@ static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
             retryAttempt => TimeSpan.FromSeconds(
                 Math.Pow(2, retryAttempt)));
 }
+```
 Essa política:
 
 Detecta erros HTTP transitórios, como respostas 5xx e 408.
@@ -205,7 +236,7 @@ Realiza até três novas tentativas de requisição.
 
 Utiliza backoff exponencial, com intervalos de aproximadamente 2, 4 e 8 segundos.
 
-Frontend — Tratamento de erros
+```Frontend — Tratamento de erros
 typescript
 this.apiService.getProducts().subscribe({
   next: (data) => {
@@ -221,8 +252,10 @@ this.apiService.getProducts().subscribe({
     this.loading = false;
   }
 });
+```
+
 Uso de LINQ
-Consultas com LINQ
+```Consultas com LINQ
 csharp
 // Ordenação
 await db.Products
@@ -255,6 +288,8 @@ var products = await db.Products
         p.Description
     })
     .ToListAsync();
+```
+
 Benefícios do LINQ
 Segurança de tipos: os erros de tipo podem ser identificados durante a compilação.
 
@@ -264,8 +299,9 @@ Composição: permite encadear várias operações em uma única consulta.
 
 Desempenho: o Entity Framework Core traduz as consultas LINQ para SQL e pode executá-las de forma eficiente no banco de dados.
 
-Componentes visuais — Angular Material
-Utilizados
+Componentes visuais — Angular Material Utilizados
+
+```
 Componente	Utilização
 MatToolbar	Barra de navegação superior.
 MatCard	Cards para agrupamento de conteúdo.
@@ -299,10 +335,14 @@ import { MatButtonModule } from '@angular/material/button';
   `
 })
 export class MyComponent {}
-Tratamento de falhas entre microsserviços
-Cenário implementado
-O sistema trata falhas quando o InvoicingService tenta se comunicar com o StockService:
+```
 
+Tratamento de falhas entre microsserviços
+
+Cenário implementado
+
+O sistema trata falhas quando o InvoicingService tenta se comunicar com o StockService:
+```
 csharp
 // InvoicingService chama o StockService
 try
@@ -335,8 +375,12 @@ error: () => {
     'Fechar'
   );
 }
+```
+
 Segurança
+
 Validações implementadas
+
 Validação de entrada: os campos recebidos são validados antes do processamento.
 
 Validação das regras de negócio: são verificadas situações como saldo insuficiente e status inválido.
@@ -344,6 +388,7 @@ Validação das regras de negócio: são verificadas situações como saldo insu
 Tratamento de erros: são retornadas mensagens genéricas para evitar a exposição de detalhes internos da aplicação.
 
 Melhorias futuras
+
 Implementação de autenticação e autorização com JWT.
 
 Implementação de controle de limite de requisições (rate limiting).
