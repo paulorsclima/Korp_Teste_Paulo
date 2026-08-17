@@ -1,6 +1,6 @@
 # ⚡ Quick Start - Comece Agora!
 
-## 📋 Checklist R\u00e1pido
+## 📋 Checklist Rapido
 
 ### 1. Instalar Ferramentas (10 min)
 
@@ -17,13 +17,13 @@ npm install -g @angular/cli@17
 
 ### 2. Configurar Banco (5 min)
 
-**Op\u00e7\u00e3o A - Azure SQL (Recomendado)**
+**Operação A - Azure SQL (Recomendado)**
 - Use seu banco existente no Azure
 - Crie um database chamado `KorpTeste`
 
-**Op\u00e7\u00e3o B - Local (Mais r\u00e1pido)**
-- Use LocalDB (j\u00e1 vem com Visual Studio)
-- N\u00e3o precisa configurar nada!
+**Operação B - Local (Mais rápido)**
+Utilize o LocalDB, que já vem incluído no Visual Studio.
+- Não precisa configurar nada!
 
 ### 3. Atualizar Connection String (2 min)
 
@@ -66,25 +66,17 @@ Acesse: **http://localhost:4200**
 
 ## ✅ Pronto!
 
-Agora voc\u00ea pode:
+Agora você pode:
 
 1. **Cadastrar produtos** em http://localhost:4200/products
 2. **Criar notas fiscais** em http://localhost:4200/invoices
 3. **Imprimir notas** e ver o estoque atualizar
 
-## 🎯 Pr\u00f3ximos Passos
 
-1. Teste todo o fluxo
-2. Adicione mais funcionalidades (opcional)
-3. Grave o v\u00eddeo de apresenta\u00e7\u00e3o
-4. Envie para rh@korp.com.br
-
-## 📞 D\u00favidas?
+## Duvidas?
 
 - Veja o `README.md` para detalhes
-- Consulte o `DETAHAMENTO_TECNICO.md` para explica\u00e7\u00f5es t\u00e9cnicas
+- Consulte o `DETAHAMENTO_TECNICO.md` para explicações tecnicas
 - Teste as APIs em:
   - Stock: http://localhost:5001/swagger
   - Invoice: http://localhost:5002/swagger
-
-Boa sorte! 🚀
