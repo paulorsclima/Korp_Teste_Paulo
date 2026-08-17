@@ -1,8 +1,8 @@
-# 📝 Detalhamento T\u00e9cnico
+# Detalhamento Tecnico
 
 ## Arquitetura do Sistema
 
-### Microsservi\u00e7os
+### Microsserviços
 
 ```
 ┌─────────────────┐         ┌─────────────────┐
@@ -130,7 +130,9 @@ Arquivo .csproj:
   </ItemGroup>
 </Project>
 ```
-```Comandos:
+Comandos:
+
+```
 dotnet restore                 # Restaura os pacotes
 dotnet add package Polly       # Adiciona um pacote
 dotnet remove package Polly   # Remove um pacote
@@ -148,6 +150,8 @@ Arquivo package.json:
   }
 }
 ```
+Comandos:
+
 ```Comandos
 npm install                         # Instala as dependências
 npm install @angular/material       # Adiciona um pacote
@@ -213,8 +217,8 @@ if (await db.Products.AnyAsync(p => p.Code == product.Code))
     return Results.BadRequest("Product code already exists");
 }
 ```
-
-```Backend — Polly e resiliência
+Backend — Polly e resiliência
+```
 static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 {
     return HttpPolicyExtensions
