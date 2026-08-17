@@ -30,11 +30,17 @@ Frontend Angular
               └── Notas fiscais e itens
 
 SQL Server / Azure SQL
+
 Microsserviços
+
 Serviço	Porta	Responsabilidade
+
 StockService	5001	Cadastro e consulta de produtos e estoque
+
 InvoicingService	5002	Cadastro e consulta de notas fiscais e itens
+
 Frontend
+
 Angular 17+
 
 Angular Material
@@ -89,6 +95,7 @@ Swagger — InvoicingService
 Os endpoints disponíveis dependem da implementação atual de cada serviço. As operações de consulta e criação devem ser testadas pelo Swagger antes da apresentação.
 
 Requisitos
+
 .NET 8 SDK.
 
 Node.js 18 ou superior.
@@ -104,7 +111,9 @@ Crie ou utilize um banco SQL Server, por exemplo, KorpTeste, e configure a conne
 
 text
 backend/StockService/appsettings.json
+
 backend/InvoicingService/appsettings.json
+
 Exemplo de configuração:
 ```text
 json
@@ -176,6 +185,7 @@ powershell
 npx ng serve
 
 Ordem recomendada para os testes
+
 Iniciar o StockService na porta 5001.
 
 Iniciar o InvoicingService na porta 5002.
@@ -213,7 +223,9 @@ static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
 Essa política representa novas tentativas para falhas transitórias. O uso de circuit breaker só deve ser declarado caso exista uma configuração específica dessa política no código.
 
 Detalhes técnicos
+
 Backend
+
 .NET 8.
 
 C#.
@@ -243,7 +255,9 @@ await db.Products
 await db.Invoices
     .Include(i => i.Items)
     .FirstOrDefaultAsync(i => i.Id == id);
+
 Frontend
+
 Angular 17+.
 
 Angular Material para os componentes visuais.
@@ -311,7 +325,7 @@ Paulo Ricardo S C Lima
 
 GitHub: @paulorsclima
 
-LinkedIn: Paulo Ricardo Cardoso
+LinkedIn: www.linkedin.com/in/paulo-ricardo-cardoso-a134131a6
 
 E-mail: paulo.rsclima@gmail.com
 
